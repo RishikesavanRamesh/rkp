@@ -3,13 +3,15 @@
 import React, { useEffect, useState } from 'react';
 import r2d2Image from '../assets/r2d2.png'; // Adjust the path to your R2D2 image
 import profileImage from "../assets/profile.jpg"
-import { FaGithub, FaLinkedin, FaEnvelope} from 'react-icons/fa'; // Importing icons
+import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa'; // Importing icons
 import Modal from 'react-modal';
 import cv from '../assets/RKCV.pdf'
 
 import WorkSection from './WorkSection';
 const Portfolio: React.FC = () => {
+
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [isShaking, setIsShaking] = useState(false);
 
     function openModal() {
         setModalIsOpen(true);
@@ -22,12 +24,34 @@ const Portfolio: React.FC = () => {
     }
 
     useEffect(() => {
-        return () => {
-            document.body.style.overflow = 'auto'; // Ensure scrolling is re-enabled on unmount
-        };
+        const shakeInterval = setInterval(() => {
+            setIsShaking(true);
+            setTimeout(() => setIsShaking(false), 500); // Shake for 500ms
+        }, 4000); // Shake every 4 seconds
+
+        return () => clearInterval(shakeInterval);
     }, []);
+
     return (
         <div className="font-sans bg-black text-white w-[80%] mx-auto flex flex-col items-center  space-y-4">
+            <style>
+                {`
+                    @keyframes shake {
+                        0% { transform: translate(0); }
+                        25% { transform: translate(-1px, 0); }
+                        50% { transform: translate(1px, 0); }
+                        75% { transform: translate(-2px, 0); }
+                        100% { transform: translate(0); }
+                    }
+                    .shake {
+                        animation: shake 0.5s forwards, colorChange 2s infinite;
+                        background: #2563EB;
+                        color: white;
+                    }
+                `}
+            </style>
+
+
             <header className="flex flex-col items-start justify-center text-white w-full mt-8">
                 <h1 className="text-6xl uppercase text-left w-[70%] -mb-3">
                     Rishikesavan Ramesh
@@ -63,11 +87,12 @@ const Portfolio: React.FC = () => {
                     <div className="flex space-x-4 mt-4 items-center justify-between">
                         <button
                             onClick={openModal}
-                            className="bg-white text-black hover:text-blue-100 border border-gray-600 py-2 px-4"
+                            className={`font-bold text-blue-300 hover:bg-blue-600 hover:text-white border border-blue-600 py-2 px-4 transition-transform transform hover:scale-105 ${isShaking ? 'shake' : ''}`}
                             style={{ borderRadius: '0' }} // No corner radius
                         >
                             View CV
                         </button>
+
                         <div className='flex space-x-4 items-center'>
                             <a href="https://github.com/RishikesavanRamesh" target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-blue-100">
                                 <FaGithub size={28} />
@@ -137,7 +162,7 @@ const Portfolio: React.FC = () => {
                 <h2 className="text-3xl">Contact Me</h2>
                 <p className="mt-4">Feel free to reach out!</p>
                 <form method="post" action="#" className="mt-4 flex flex-col items-center">
-              
+
                     <input
                         type="text"
                         id="name"
@@ -172,7 +197,7 @@ const Portfolio: React.FC = () => {
                 </form>
             </section>
 
-    
+
 
             <footer className="bg-blue-300 w-[100vw] text-black text-center ">
                 <p>&copy; {new Date().getFullYear()} RK's Portfolio</p>

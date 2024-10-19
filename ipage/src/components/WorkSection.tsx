@@ -53,50 +53,62 @@ const WorkSection = () => {
         });
     };
 
-    return (
-        <section id="work" className="w-full py-20 text-center border">
-            <h2 className="text-3xl">My Work</h2>
-            <p className="mt-4">Here are some of my recent projects:</p>
-            <div className="flex overflow-x-auto space-x-4 mt-4 p-4">
-                {projects.map((project, projectIndex) => (
-                    <div key={projectIndex} className="border-2 p-4 rounded-lg min-h-[400px] w-[60vw] flex-shrink-0">
-                        <div className="relative w-full h-[90%] flex items-center justify-center">
-                            <button
-                                onClick={() => handlePrev(projectIndex)}
-                                className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black text-white p-4 border-2 shadow-lg transition-opacity duration-200 hover:opacity-100 opacity-75">
-                                &#8249;
-                            </button>
-                            <img
-                                src={project.images[currentImageIndices[projectIndex]]}
-                                alt={project.title}
-                                className="w-auto h-full max-h-[600px] object-cover"
-                            />
-                            <button
-                                onClick={() => handleNext(projectIndex)}
-                                className="absolute right-0 top-1/2 transform -translate-y-1/2  bg-black text-white p-4 border-2 shadow-lg transition-opacity duration-200 hover:opacity-100 opacity-75">
-                                &#8250;
-                            </button>
-                            <div className="absolute top-0 right-0 p-4 text-white text-right">
-                                <div className="bg-gradient-to-r from-black to-blue-800 p-2 rounded-lg border-2">
-                                    <strong>{project.description}</strong>
-                                </div>
+    return (<section
+        id="work"
+        className="w-full py-20 text-center border"
+        style={{ minHeight: '400px', maxHeight: '800px' }} // Adjust as needed
+    >
+        <h2 className="text-3xl">My Work</h2>
+        <p className="mt-4">Here are some of my recent projects:</p>
+        <div className="flex overflow-x-auto space-x-4 mt-4 p-4">
+            {projects.map((project, projectIndex) => (
+                <div
+                    key={projectIndex}
+                    className="border-2 p-4 rounded-lg min-h-[400px] w-[80vw] md:w-[60vw] flex-shrink-0"
+                    style={{ minWidth: '300px', maxWidth: '600px' }} // Specify min and max widths
+                >
+                    <div className="relative w-full h-60 md:h-72 flex items-center justify-center">
+                        <button
+                            onClick={() => handlePrev(projectIndex)}
+                            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black text-white p-4 border-2 shadow-lg transition-opacity duration-200 hover:opacity-100 opacity-75"
+                        >
+                            &#8249;
+                        </button>
+                        <img
+                            src={project.images[currentImageIndices[projectIndex]]}
+                            alt={project.title}
+                            className="w-full h-full object-cover"
+                        />
+                        <button
+                            onClick={() => handleNext(projectIndex)}
+                            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black text-white p-4 border-2 shadow-lg transition-opacity duration-200 hover:opacity-100 opacity-75"
+                        >
+                            &#8250;
+                        </button>
+                        <div className="absolute top-0 right-0 p-4 text-white text-right">
+                            <div className="bg-gradient-to-r from-black to-blue-800 p-2 rounded-lg">
+                                <strong>{project.description}</strong>
                             </div>
                         </div>
-                        <div className="flex items-center justify-center mt-2">
-                            <h3 className="text-xl">{project.title}</h3>
-                            <a
-                                href={project.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="ml-4 border-2 text-blue-300 p-2  hover:bg-blue-700 hover:text-white transition duration-200">
-                                Go to Project
-                            </a>
-                        </div>
-
                     </div>
-                ))}
-            </div>
-        </section>
+                    <div className="flex items-center justify-center mt-2">
+                        <h3 className="text-xl">{project.title}</h3>
+                        <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="ml-4 border-2 text-blue-300 p-2 hover:bg-blue-700 hover:text-white transition duration-200"
+                        >
+                            Go to Project
+                        </a>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </section>
+    
+
+
     );
 };
 

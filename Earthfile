@@ -2,7 +2,7 @@ VERSION 0.8
 
 FROM ubuntu:22.04
 
-PROJECT portfolio
+PROJECT earthly-sa/portfolio
 
 
 

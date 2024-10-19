@@ -1,20 +1,5 @@
-import { useEffect } from 'react';
 
 const ContactForm = () => {
-    useEffect(() => {
-        // Load the Ratufa script on component mount
-        const script = document.createElement('script');
-        script.id = 'ratufa_loader';
-        script.src = 'https://www.ratufa.io/c/ld.js?f=ou23181v&n=n1.ratufa.io';
-        script.async = true;
-        document.body.appendChild(script);
-
-        return () => {
-            // Cleanup: Remove the script when the component unmounts
-            document.body.removeChild(script);
-        };
-    }, []);
-
 
 
     return (
@@ -54,6 +39,7 @@ const ContactForm = () => {
                 >
                     Send
                 </button>
+
             </form>
 
         </section>
